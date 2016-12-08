@@ -1,0 +1,86 @@
+int matriz[20][3]={{1,22,9},{24,3,8},{23,14,0},{20,16,6},{1,12,-3},{4,-3,18},{18,-3,21},{6,-4,0},{24,22,9},{19,20,25},{13,8,4},{23,19,12},{2,4,-3},{-2,15,18},{-5,24,12},{-3,3,25},{1,13,22},{17,10,17},{-3,5,21},{11,14,5}};
+int i;
+int j;
+char dato;
+void setup() {
+  Serial.begin(9600);
+  Serial.println("                                  MENU DE SELCCION");
+  Serial.println(" ");
+  Serial.println("Presione 1 para obtener la suma de cada fila");
+  Serial.println("Presione 2 para obtener la multiplicacion de cada columna");
+  Serial.println("Presione 3 para obtener el promedio total de las columnas");
+  Serial.println(" ");
+}
+
+void (sumaFilas) (void){
+  int sumaFila=0;
+  String res;
+  for(j=0;j<20;j++)
+  {
+    for(i=0;i<3;i++)
+    {
+      sumaFila=sumaFila+matriz[j][i];
+    }
+    res=String("La suma de la fila "+String(j+1)+" es: "+String(sumaFila));
+    Serial.println(res);
+    sumaFila=0;
+  }
+  Serial.println(" ");
+}
+
+void (multiComlumnas) (void){
+  long int multColumna=1;
+  String res;
+  for(j=0;j<3;j++)
+    {
+      for(i=0;i<20;i++)
+      {
+        multColumna=multColumna*matriz[i][j];    
+      }
+      res=String("La multiplicacion de la columna "+String(j+1)+" es: "+String(multColumna));
+      Serial.println(res);
+      multColumna=1;
+    }
+    Serial.println(" ");
+}
+
+void (proColumnas) (void){
+  int sumaColumna=0;
+  float totalSumaC=0;
+  float promedioColumnas=0;
+  String res;
+  for(j=0;j<3;j++)
+    {
+      for(i=0;i<20;i++)
+      {
+        sumaColumna=sumaColumna+matriz[i][j];
+      }
+      totalSumaC=totalSumaC+sumaColumna;
+      sumaColumna=0;
+    }
+    promedioColumnas=(totalSumaC/3);
+    res=String("El promedio de la suma de las columnas es: "+String(promedioColumnas));
+    Serial.println(res);
+}
+
+void loop() {
+  if (Serial.available()>0){
+    dato=Serial.read();
+    switch (dato){
+      case '1':
+      Serial.println(" ");
+      sumaFilas();
+      break;
+      
+      case '2':
+      Serial.println(" ");
+      multiComlumnas();
+      break;
+      
+      case '3':
+      Serial.println(" ");
+      proColumnas();
+      break;
+    }
+  }
+}
