@@ -1,0 +1,23 @@
+String dato;
+int cont ;
+#include <LiquidCrystal.h>
+LiquidCrystal lcd (12,11,5,4,3,2);
+void setup() {
+Serial.begin (9600);
+lcd.begin(16,2);
+}
+void loop() {
+if(Serial.available()>0);
+  {
+    cont = random (12);
+    dato=Serial.readString();
+    lcd.setCursor(cont,6);  
+    lcd.print(dato);
+    delay(250);
+    lcd.setCursor(cont,6);  
+    lcd.print(' ');
+    delay (250); 
+  }
+  lcd.clear ();
+  delay (250);
+}
